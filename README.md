@@ -1,4 +1,6 @@
-# triviagame
+# Trivia Game
+[try the game here](https://triviagame-two.vercel.app/#/)
+
 
 ## Project setup
 ```

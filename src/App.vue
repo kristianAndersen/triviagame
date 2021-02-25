@@ -1,18 +1,6 @@
 <template>
   <div id="app">
        <router-view/>
-   <!-- <welcome msg="THE AWESOME TRIVIA GAME"/>
-     <v-button :onClick="consoleClick">PLAY GAME</v-button>
-       components: {
-    welcome,
-    'v-button':Button
-  },
-  methods:{
-    consoleClick() {
-      console.log('Button clicked')
-    }
-  }
-     -->
   </div>
 </template>
 
@@ -43,7 +31,7 @@ body{
     calc(1rem + var(--fluid-type-target, 3vw)),
     var(--fluid-type-max, 1.3rem)
   );
-
+ background-color: rgb(11, 119, 119);
 }
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -51,6 +39,10 @@ body{
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+   position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 
