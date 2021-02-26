@@ -46,7 +46,8 @@ computed:{
 };
 </script>
 
-<style>
+<style scoped>
+
 #endgamestats{
     position: relative;
     margin: 0 auto;
