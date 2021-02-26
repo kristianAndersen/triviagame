@@ -1,5 +1,5 @@
 
-const url="https://opentdb.com/api.php?amount=10&category=9&difficulty=easy";
+const url="https://opentdb.com/api.php?amount=11&category=9&difficulty=easy";
 
 const getQandA = async() => {
   let response = await fetch(url);

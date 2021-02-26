@@ -1,11 +1,13 @@
 <template>
-    <div id="questionTime">
+    <div id="wrap">
+        <div v-if="questionCount!=getQuestionsLength" id="questionTime">
      <!--Do noyt show the question if it is not yet loaded -->         
     <h1 id="thequestion" class="fade-in" v-html="loading ? 'Loading...' : getCurQuestion.question"></h1>
+     <score :numOfQuestions=getQuestionsLength :scoreNum.sync="scoreCount"/>
     
-    <hr class="divider"/> 
 
     <div id="btnwrap" >
+        <hr class="divider"/> 
         <div id="btnwrapinner" v-if="getCurQuestion">
         <button class="fade-in"
           v-for="answer in getCurQuestion.answers"
@@ -15,12 +17,19 @@
           @click.prevent="handleButtonClick"
         ></button>
          </div>
+            <hr class="divider"/> 
       </div>
- <hr class="divider"/> 
-            <score :scoreNum.sync="scoreCount"/>
-            <endgame :totalScore="scoreCount" :qCount="questionCount"/>
+    
       </div>
 
+           
+
+            <div id="endgameWrap">
+            <endgame :totalScore="scoreCount" :qCount="questionCount"/>
+            </div>
+          
+      </div>
+  
 </template>
 
 <script>
@@ -56,9 +65,7 @@ export default {
     
   },
   methods:{
-    setQcount:function(){
-        this.questionCount++
-    },
+  
     handleButtonClick: function(evt) {
         let index = evt.target.getAttribute("index");
         let answer =evt.target.innerHTML;
@@ -69,23 +76,24 @@ export default {
         
         if(answer==this.questions[index].correct_answer){
          target.classList.add("answerCorrect");
-         this.scoreCount++
+              this.scoreCount++
         }else{
             target.classList.add("answerLooser");
-            
         }
          setTimeout(
             function() {
                 target.classList.remove("answerCorrect");
                 target.classList.remove("answerLooser");
               this.questionCount++
+             
             }.bind(this),
             1000
           );
        
 
     }
-  },computed:{
+  },
+  computed:{
       getCurQuestion(){
         if (this.questions !== []) {
            
@@ -93,26 +101,33 @@ export default {
             }
       return null;
       },
+      getQuestionsLength(){
+          
+          return this.questions.length -1
+      },
       getQcount(){
           return this.questionCount;
       },
   
-  }
+  },
  
 };
 </script>
-<style scoped>
+<style >
 #questionTime{
     position: relative;
+    padding-bottom: 2rem;
     margin: 0 auto;
     width: 90vw;
-    min-height: 12rem;
-    background-color: aqua;
+    min-height: 33rem;
+    background-color: rgb(88, 146, 146);
     border-radius: 1rem;
 }
 #thequestion{
     padding: 2rem;
+    font-size: 150%;
     text-transform: uppercase;
+    font-weight: bolder;
 }
 .divider {
    flex-grow: 1;
@@ -127,14 +142,15 @@ export default {
 #btnwrap {
   position: relative;
   display: block;
-  min-height: 10rem;
+  min-height: 17.25rem;
   width: 90%;
   margin: 0 auto;
   
 
 }
 #btnwrapinner{
-display: flex;
+
+  display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
@@ -145,13 +161,14 @@ button {
   font-size: 1.5rem;
   font-weight: bold;
   padding: 2rem;
-  margin: 0.3rem;
+  margin: 0.9rem;
   width: 47%;
   background-color: rgba(100, 100, 100, 0.3);
   border: none;
   border-radius: 0.4rem;
-  box-shadow: 3px 5px 5px rgba(0, 0, 0, 0.2);
+  box-shadow: 0.2rem 0.5rem 0.5rem rgba(0, 0, 0, 0.2);
   cursor: pointer;
+  color: aliceblue;
 }
 button.answerCorrect{
  background: linear-gradient(
@@ -170,9 +187,9 @@ button.answerLooser{
   );
 }
 button:hover {
-  transform: scale(1.02);
-  box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.14), 0 1px 7px 0 rgba(0, 0, 0, 0.12),
-    0 3px 1px -1px rgba(0, 0, 0, 0.2);
+  transform: scale(1.05);
+  box-shadow: 0 0.3rem 0.3rem 0 rgba(0, 0, 0, 0.14), 0 0.2rem 0.7rem 0 rgba(0, 0, 0, 0.12),
+    0 0.2rem 0.2rem -0.2rem rgba(0, 0, 0, 0.2);
 }
 
 .fade-in {
@@ -186,4 +203,17 @@ animation: fadeIn ease 2s;
 0% {opacity:0;}
 100% {opacity:1;}
 }
+
+.fade-out {
+animation: fadeOut ease 2s;
+-webkit-animation: fadeOut ease 2s;
+-moz-animation: fadeOut ease 2s;
+-o-animation: fadeOut ease 2s;
+-ms-animation: fadeOut ease 2s;
+}
+@keyframes fadeOut {
+0% {opacity:1;}
+100% {opacity:0;}
+}
+
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div id="scorenum" v-html="scoreNum"> </div>
+  <div id="scorenum" >{{"You have "+scoreNum+" correct answers out of "+numOfQuestions}} </div>
        
     
 </template>
@@ -8,7 +8,8 @@
 export default {
  name: "score",
       props: {
-         scoreNum: Number
+         scoreNum: Number,
+         numOfQuestions:Number
       }
 }
 </script>
@@ -16,13 +17,14 @@ export default {
 <style scoped>
 
 #scorenum{
-
+text-transform: uppercase;
 font-weight: bolder;
+color: rgb(55, 74, 160);
 font-size: clamp(
 
-  var(--fluid-type-min, 2.5rem),
-    calc(1rem + var(--fluid-type-target, 5vw)),
-    var(--fluid-type-max, 5rem)
+  var(--fluid-type-min, 2rem),
+    calc(1rem + var(--fluid-type-target, 3vw)),
+    var(--fluid-type-max, 3rem)
 )
 };
 
