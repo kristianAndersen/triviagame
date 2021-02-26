@@ -1,5 +1,5 @@
 <template>
-    <div id="wrap">
+    <div>
         <div v-if="questionCount!=getQuestionsLength" class="questionTime">
      <!--Do noyt show the question if it is not yet loaded -->         
     <h1  class="thequestion fade-in" v-html="loading ? 'Loading...' : getCurQuestion.question"></h1>
