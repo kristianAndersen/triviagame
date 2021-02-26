@@ -117,6 +117,7 @@ export default {
 };
 </script>
 <style>
+
 .questionTime{
     position: relative;
     padding-bottom: 2rem;
@@ -133,7 +134,9 @@ export default {
     font-weight: bolder;
 }
 .divider {
-   flex-grow: 1;
+   -webkit-box-flex: 1;
+       -ms-flex-positive: 1;
+           flex-grow: 1;
   border-bottom: 0.1rem solid black;
   border-top: none;
   border-left: none;
@@ -153,10 +156,20 @@ export default {
 }
 .btnwrapinner{
 
+  display: -webkit-box;
+
+  display: -ms-flexbox;
+
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 button:focus {outline:0;}
 
@@ -169,11 +182,23 @@ button {
   background-color: rgba(100, 100, 100, 0.3);
   border: none;
   border-radius: 0.4rem;
-  box-shadow: 0.2rem 0.5rem 0.5rem rgba(0, 0, 0, 0.2);
+  -webkit-box-shadow: 0.2rem 0.5rem 0.5rem rgba(0, 0, 0, 0.2);
+          box-shadow: 0.2rem 0.5rem 0.5rem rgba(0, 0, 0, 0.2);
   cursor: pointer;
   color: aliceblue;
 }
 button.answerCorrect{
+ background: -webkit-gradient(
+    linear,
+    left top, left bottom,
+    from(rgba(100, 100, 100, 0.3)),
+    to(rgba(0, 178, 72, 0.5))
+  );
+ background: -o-linear-gradient(
+    top,
+    rgba(100, 100, 100, 0.3),
+    rgba(0, 178, 72, 0.5)
+  );
  background: linear-gradient(
     180deg,
     rgba(100, 100, 100, 0.3),
@@ -183,6 +208,17 @@ button.answerCorrect{
 }
 
 button.answerLooser{
+ background: -webkit-gradient(
+    linear,
+    left top, left bottom,
+    from(rgba(100, 100, 100, 0.3)),
+    to(rgb(202, 1, 1))
+  );
+ background: -o-linear-gradient(
+    top,
+    rgba(100, 100, 100, 0.3),
+    rgb(202, 1, 1)
+  );
  background: linear-gradient(
     180deg,
     rgba(100, 100, 100, 0.3),
@@ -190,8 +226,12 @@ button.answerLooser{
   );
 }
 button:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0.3rem 0.3rem 0 rgba(0, 0, 0, 0.14), 0 0.2rem 0.7rem 0 rgba(0, 0, 0, 0.12),
+  -webkit-transform: scale(1.05);
+      -ms-transform: scale(1.05);
+          transform: scale(1.05);
+  -webkit-box-shadow: 0 0.3rem 0.3rem 0 rgba(0, 0, 0, 0.14), 0 0.2rem 0.7rem 0 rgba(0, 0, 0, 0.12),
+    0 0.2rem 0.2rem -0.2rem rgba(0, 0, 0, 0.2);
+          box-shadow: 0 0.3rem 0.3rem 0 rgba(0, 0, 0, 0.14), 0 0.2rem 0.7rem 0 rgba(0, 0, 0, 0.12),
     0 0.2rem 0.2rem -0.2rem rgba(0, 0, 0, 0.2);
 }
 
@@ -201,6 +241,10 @@ animation: fadeIn ease 2s;
 -moz-animation: fadeIn ease 2s;
 -o-animation: fadeIn ease 2s;
 -ms-animation: fadeIn ease 2s;
+}
+@-webkit-keyframes fadeIn {
+0% {opacity:0;}
+100% {opacity:1;}
 }
 @keyframes fadeIn {
 0% {opacity:0;}
@@ -213,6 +257,10 @@ animation: fadeOut ease 2s;
 -moz-animation: fadeOut ease 2s;
 -o-animation: fadeOut ease 2s;
 -ms-animation: fadeOut ease 2s;
+}
+@-webkit-keyframes fadeOut {
+0% {opacity:1;}
+100% {opacity:0;}
 }
 @keyframes fadeOut {
 0% {opacity:1;}
