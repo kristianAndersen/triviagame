@@ -116,7 +116,7 @@ export default {
  
 };
 </script>
-<style >
+<style>
 #questionTime{
     position: relative;
     padding-bottom: 2rem;
