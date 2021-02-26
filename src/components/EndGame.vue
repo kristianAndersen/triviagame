@@ -18,7 +18,7 @@
     <img class="looserimg" src="looser.gif">
   <h2 class="htag" >YOU ARE A BIG LOOSER</h2>
         <div id="score"> You only answered <span class="highlight">{{
-                  howGoodBad}} % correctly pathetic!
+                  howGoodBad}} % correctly. That is {{totalScore}} out of {{qCount}} pathetic!
               </span>
        </div>
     <hr class="divider"/> 
@@ -64,10 +64,9 @@ computed:{
 }
 .looserimg{
   padding: 3rem;
-
   vertical-align: middle;
-  width: 35rem;
-  height: 35rem;
+  width: 80%;
+  height: 80%;
   border-radius: 50%;
 }
 .fade-in {

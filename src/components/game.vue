@@ -36,6 +36,7 @@
 
 import score from './scorer';
 import endgame from './EndGame';
+
 export default {
   name: 'game',
   data(){
@@ -43,6 +44,7 @@ export default {
       questionCount:null,
       scoreCount:null,
       questions:[],
+      correctQuestions:null,
       loading:true
     }
   },components:{
@@ -56,7 +58,8 @@ export default {
   created:function(){
       this.questionCount=0;
       this.scoreCount=0;
-      
+      this.correctQuestions=0;
+
       this.apidata.then((result) => { 
          this.questions=result;  
          this.loading=false   
