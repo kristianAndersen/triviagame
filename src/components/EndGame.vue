@@ -1,6 +1,6 @@
 <template>
 
-<div id="endgamestats" class="fade-in" v-if="qCount==10" >
+<div  class="endgamestats fade-in" v-if="qCount==10" >
 
   <div v-if="totalScore>=10">
     <img class="looserimg" src="winner.gif">
@@ -48,7 +48,7 @@ computed:{
 
 <style scoped>
 
-#endgamestats{
+.endgamestats{
     position: relative;
     margin: 0 auto;
     width: 40vw;

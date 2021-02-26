@@ -1,14 +1,14 @@
 <template>
     <div id="wrap">
-        <div v-if="questionCount!=getQuestionsLength" id="questionTime">
+        <div v-if="questionCount!=getQuestionsLength" class="questionTime">
      <!--Do noyt show the question if it is not yet loaded -->         
-    <h1 id="thequestion" class="fade-in" v-html="loading ? 'Loading...' : getCurQuestion.question"></h1>
+    <h1  class="thequestion fade-in" v-html="loading ? 'Loading...' : getCurQuestion.question"></h1>
      <score :numOfQuestions=getQuestionsLength :scoreNum.sync="scoreCount"/>
     
 
-    <div id="btnwrap" >
+    <div class="btnwrap" >
         <hr class="divider"/> 
-        <div id="btnwrapinner" v-if="getCurQuestion">
+        <div class="btnwrapinner" v-if="getCurQuestion">
         <button class="fade-in"
           v-for="answer in getCurQuestion.answers"
           :index="getCurQuestion.key"
@@ -24,7 +24,7 @@
 
            
 
-            <div id="endgameWrap">
+            <div class="endgameWrap">
             <endgame :totalScore="scoreCount" :qCount="questionCount"/>
             </div>
           
@@ -117,7 +117,7 @@ export default {
 };
 </script>
 <style>
-#questionTime{
+.questionTime{
     position: relative;
     padding-bottom: 2rem;
     margin: 0 auto;
@@ -126,7 +126,7 @@ export default {
     background-color: rgb(88, 146, 146);
     border-radius: 1rem;
 }
-#thequestion{
+.thequestion{
     padding: 2rem;
     font-size: 150%;
     text-transform: uppercase;
@@ -142,7 +142,7 @@ export default {
   margin-bottom: 1rem;
 }
 
-#btnwrap {
+.btnwrap {
   position: relative;
   display: block;
   min-height: 17.25rem;
@@ -151,7 +151,7 @@ export default {
   
 
 }
-#btnwrapinner{
+.btnwrapinner{
 
   display: flex;
   flex-direction: row;
