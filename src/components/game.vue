@@ -1,34 +1,6 @@
 <template>
     <div>
         <div v-if="questionCount!=getQuestionsLength" class="questionTime">
-<<<<<<< HEAD
-     <!--Do noyt show the question if it is not yet loaded -->         
-    <h1  class="thequestion fade-in" v-html="loading ? 'Loading...' : getCurQuestion.question"></h1>
-     <score :numOfQuestions=getQuestionsLength :correctQuestions.sync="correctQuestions"/>
-    
-
-    <div class="btnwrap" >
-        <hr class="divider"/> 
-        <div class="btnwrapinner" v-if="getCurQuestion">
-        <button class="fade-in"
-          v-for="answer in getCurQuestion.answers"
-          :index="getCurQuestion.key"
-          :key="answer"
-          v-html="answer"
-          @click.once="handleButtonClick"
-        ></button>
-         </div>
-            <hr class="divider"/> 
-      </div>
-    
-      </div>
-
-           
-
-            <div class="endgameWrap">
-            <endgame  :totalScore="scoreCount" :qCount="questionCount" :correct="correctQuestions" :uAnswer="answers"
-                 :cAnswer="correctAnswer" :quest="thequestion"/>
-=======
             <!--Do noyt show the question if it is not yet loaded -->         
             <h1  class="thequestion fade-in" v-html="loading ? 'Loading...' : getCurQuestion.question"></h1>
             <score :numOfQuestions=getQuestionsLength :correctQuestions.sync="correctQuestions"/>
@@ -45,7 +17,6 @@
                     ></button>
                 </div>
                 <hr class="divider"/> 
->>>>>>> 5627fa475e279aee4317520feab1bf1a128cca4e
             </div>
         </div>
         <!--When end of question have been reached then display result screen-->
@@ -99,9 +70,7 @@ export default {
         apidata:Promise,
         totalScore:Number
     },
-  
-<<<<<<< HEAD
-    handleButtonClick: function(evt) {
+handleButtonClick: function(evt) {
         let index = evt.target.getAttribute("index");
         let answer =evt.target.innerHTML;
         let target=evt.target;
