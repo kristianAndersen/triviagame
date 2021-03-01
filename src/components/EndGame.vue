@@ -2,9 +2,10 @@
 
 <div>
   <div class="endgamestats fade-in" v-if="qCount==10">
-  <div v-if="totalScore>=10">
+  <div v-if="correct>=10">
     <img class="looserimg" src="winner.gif">
-    <h2 class="htag" >#WINNING</h2>
+     <h2 class="htag">#WINNING <br>you got {{totalScore}} points</h2>
+    
        <div class="score"> You answered <span class="highlight">{{
                   howGoodBad}} % correctly!
               </span>
@@ -14,11 +15,12 @@
     <hr class="divider"/> 
   </div>
 
-  <div v-if="totalScore<10">
+  <div v-if="correct<10">
     <img class="looserimg" src="looser.gif">
-  <h2 class="htag" >YOU ARE A BIG LOOSER</h2>
-        <div class="score"> You only answered <br><span class="highlight">{{
-                  howGoodBad}} % correctly. That is {{totalScore}} out of {{qCount}} pathetic!
+    <h2 class="htag">WHAT A LOSER <br>you only got {{totalScore}} points</h2>
+
+        <div class="score"> You answered <br><span class="highlight">{{
+                  howGoodBad}} % correctly. That is {{correct}} out of {{qCount}} pathetic!
               </span>
        </div>
     <hr class="divider"/> 
@@ -37,11 +39,12 @@ export default {
 
 props:{
     totalScore:Number,
-    qCount:Number
+    qCount:Number,
+    correct:Number
 },
 computed:{
     howGoodBad(){
-          return Math.floor( (this.totalScore / this.qCount) * 100)
+          return Math.floor( (this.correct / this.qCount) * 100)
       }
 }
 };

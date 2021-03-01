@@ -3,7 +3,7 @@
         <div v-if="questionCount!=getQuestionsLength" class="questionTime">
      <!--Do noyt show the question if it is not yet loaded -->         
     <h1  class="thequestion fade-in" v-html="loading ? 'Loading...' : getCurQuestion.question"></h1>
-     <score :numOfQuestions=getQuestionsLength :scoreNum.sync="scoreCount"/>
+     <score :numOfQuestions=getQuestionsLength :correctQuestions.sync="correctQuestions"/>
     
 
     <div class="btnwrap" >
@@ -25,7 +25,7 @@
            
 
             <div class="endgameWrap">
-            <endgame :totalScore="scoreCount" :qCount="questionCount"/>
+            <endgame  :totalScore="scoreCount" :qCount="questionCount" :correct="correctQuestions"/>
             </div>
           
       </div>
@@ -45,6 +45,7 @@ export default {
       scoreCount:null,
       questions:[],
       correctQuestions:null,
+      answeredQuestions:null,
       loading:true
     }
   },components:{
@@ -59,6 +60,7 @@ export default {
       this.questionCount=0;
       this.scoreCount=0;
       this.correctQuestions=0;
+      this.answeredQuestions=0;
 
       this.apidata.then((result) => { 
          this.questions=result;  
@@ -79,7 +81,9 @@ export default {
         
         if(answer==this.questions[index].correct_answer){
          target.classList.add("answerCorrect");
-              this.scoreCount++
+              
+              this.correctQuestions++
+              this.scoreCount+=10
         }else{
             target.classList.add("answerLooser");
         }

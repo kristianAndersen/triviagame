@@ -1,5 +1,5 @@
 <template>
-  <div id="scorenum" >{{"You have "+scoreNum+" correct answers out of "+numOfQuestions}} </div>
+  <div id="scorenum" >{{"You have "+correctQuestions+" correct answers out of "+numOfQuestions}} </div>
        
     
 </template>
@@ -8,7 +8,7 @@
 export default {
  name: "score",
       props: {
-         scoreNum: Number,
+         correctQuestions: Number,
          numOfQuestions:Number
       }
 }
