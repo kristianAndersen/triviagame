@@ -4,7 +4,7 @@
             <!--Do noyt show the question if it is not yet loaded -->         
             <h1  class="thequestion fade-in" v-html="loading ? 'Loading...' : getCurQuestion.question"></h1>
             <score :numOfQuestions=getQuestionsLength :correctQuestions.sync="correctQuestions"/>
-
+            <!--Display each answer as a button and handle selection-->
             <div class="btnwrap" >
                 <hr class="divider"/> 
                 <div class="btnwrapinner" v-if="getCurQuestion">
@@ -19,6 +19,7 @@
                 <hr class="divider"/> 
             </div>
         </div>
+        <!--When end of question have been reached then display result screen-->
         <div class="endgameWrap">
             <endgame  :totalScore="scoreCount" :qCount="questionCount" :correct="correctQuestions"/>
         </div>
@@ -65,13 +66,18 @@ export default {
     },
     
     methods:{
+/*
+* Check if answer is correct and change index of current answer
+*/
         handleButtonClick: function(evt) {
             let index = evt.target.getAttribute("index");
             let answer =evt.target.innerHTML;
             let target=evt.target;
             this.isAnswerCorrect(answer,index,target);
         },
-    
+/*
+* Check is answer is correct, increase score if true
+*/
         isAnswerCorrect: function(answer,index,target){
             if(answer==this.questions[index].correct_answer){
                 target.classList.add("answerCorrect");
