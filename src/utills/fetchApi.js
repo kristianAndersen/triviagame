@@ -1,6 +1,9 @@
 
 const url="https://opentdb.com/api.php?amount=11&category=9&difficulty=easy";
-
+/*
+* Collect possible answers from API call and return with shuffled answers
+* shuffle(<arr>) returns a shuffled instance of input array
+*/
 const getQandA = async() => {
   let response = await fetch(url);
   let jsonResponse = await response.json();
