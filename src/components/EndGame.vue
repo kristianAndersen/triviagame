@@ -1,48 +1,91 @@
 <template>
-<!--Component for displaying and handling end result screen-->
-    <div>
+  <!--Component for displaying and handling end result screen-->
+  <div>
     <!--Fade in results and restart button when question answered threshold has been reached
         Display appropriate endscreen based on player performance-->
-        <div class="endgamestats fade-in" v-if="qCount==10">
-            <div v-if="correct>=10">
-                <img class="looserimg" src="winner.gif">
-                <h2 class="htag">#WINNING <br>you got {{totalScore}} points</h2>
-                <div class="score"> You answered <span class="highlight">{{
-                    howGoodBad}} % correctly!
-                    </span>
-                </div>
-                <hr class="divider"/> 
-                <button> TRY AGAIN</button>
-                <hr class="divider"/> 
-            </div>
-            <div v-if="correct<10 && correct>=5">
-                <img class="looserimg" src="closebutno.gif">
-                <h2 class="htag">SO CLOSE YET SO FAR <br>you got {{totalScore}} points</h2>
-                <div class="score"> You answered <br><span class="highlight">{{
-                    howGoodBad}} % correctly. That is {{correct}} out of {{qCount}} sad!
-                    </span>
-                </div>
-                <hr class="divider"/> 
-                <router-link to="/">
-                    <button> TRY AGAIN</button>
-                </router-link>
-                <hr class="divider"/> 
-            </div>
-            <div v-if="correct<5">
-                <img class="looserimg" src="looser.gif">
-                <h2 class="htag">WHAT A LOSER <br>you only got {{totalScore}} points</h2>
-                <div class="score"> You answered <br><span class="highlight">{{
-                    howGoodBad}} % correctly. That is {{correct}} out of {{qCount}} pathetic!
-                    </span>
-                </div>
-                <hr class="divider"/> 
-                <router-link to="/">
-                <button> TRY AGAIN</button>
-                </router-link>
-                <hr class="divider"/> 
-            </div>
+    <div class="endgamestats fade-in" v-if="qCount == 10">
+      <div v-if="correct >= 10">
+        <img class="looserimg" src="winner.gif" />
+        <h2 class="htag">#WINNING <br />you got {{ totalScore }} points</h2>
+        <div class="score">
+          You answered
+          <span class="highlight">{{ howGoodBad }} % correctly! </span>
         </div>
+        <hr class="divider" />
+        <button>TRY AGAIN</button>
+        <hr class="divider" />
+      </div>
+      <div v-if="correct < 10 && correct >= 5">
+        <img class="looserimg" src="closebutno.gif" />
+        <h2 class="htag">
+          SO CLOSE YET SO FAR <br />you got {{ totalScore }} points
+        </h2>
+        <div class="score">
+          You answered <br /><span class="highlight"
+            >{{ howGoodBad }} % correctly. That is {{ correct }} out of
+            {{ qCount }} sad!
+          </span>
+        </div>
+        <hr class="divider" />
+        <router-link to="/">
+          <button>TRY AGAIN</button>
+        </router-link>
+        <hr class="divider" />
+        <h6 @click="toggle = !toggle">SHOW ME THE ANSWERS</h6>
+      </div>
+
+      <div v-if="correct < 5">
+        <img class="looserimg" src="looser.gif" />
+        <h2 class="htag">
+          WHAT A LOSER <br />you only got {{ totalScore }} points
+        </h2>
+        <div class="score">
+          You answered <br /><span class="highlight"
+            >{{ howGoodBad }} % correctly. That is {{ correct }} out of
+            {{ qCount }} pathetic!
+          </span>
+        </div>
+        <hr class="divider" />
+        <router-link to="/">
+          <button>TRY AGAIN</button>
+        </router-link>
+        <hr class="divider" />
+        <h6 @click="toggle = !toggle">SHOW ME THE ANSWERS</h6>
+        
+        
+      </div>
+      <transition name="fade">
+        <div class="ans" v-show="toggle">
+          
+          <div class="rightWrong">
+            <div class="row1">
+              <h4>The question</h4>
+              <div v-for="(item, index) in allquest" :key="item">
+                <div v-html="item.q" class="qu"></div>
+
+                <div
+                  v-if="item.ua[index] == item.ca[index]"
+                  class="row ua right"
+                >
+                  Your avnswer: <strong>{{ item.ua[index] }}</strong>
+                </div>
+                <div v-else class="row ua wrong">
+                  Your Answer:<strong> {{ item.ua[index] }}</strong>
+                </div>
+
+                <div class="row ca right">
+                  <strong>{{ item.ca[index] }}</strong>
+                </div>
+                <br class="clearfix" />
+              </div>
+              <h6 @click="toggle = !toggle">HIDE THE ANSWERS</h6>
+            </div>
+          </div>
+          
+        </div>
+        </transition>
     </div>
+  </div>
 </template>
     
       
@@ -50,7 +93,6 @@
 
 <script>
 export default {
-<<<<<<< HEAD
   data() {
     return {
       toggle: false,
@@ -60,9 +102,9 @@ export default {
     totalScore: Number,
     qCount:Number,
     correct:Number,
-    uAnswer:null,
-    cAnswer:null,
-    quest:null
+    uAnswer:[],
+    cAnswer:[],
+    quest:[]
   },
   computed: {
     howGoodBad() {
@@ -82,19 +124,6 @@ export default {
       this.isActive = !this.isActive;
     }
   }
-=======
-    props:{
-        totalScore:Number,
-        qCount:Number,
-        correct:Number
-    },
-
-    computed:{
-        howGoodBad(){
-            return Math.floor( (this.correct / this.qCount) * 100)
-        }
-    }
->>>>>>> 5627fa475e279aee4317520feab1bf1a128cca4e
 };
 </script>
 

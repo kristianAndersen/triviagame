@@ -1,29 +1,36 @@
 <template>
     <div>
         <div v-if="questionCount!=getQuestionsLength" class="questionTime">
-            <!--Do noyt show the question if it is not yet loaded -->         
-            <h1  class="thequestion fade-in" v-html="loading ? 'Loading...' : getCurQuestion.question"></h1>
-            <score :numOfQuestions=getQuestionsLength :correctQuestions.sync="correctQuestions"/>
-            <!--Display each answer as a button and handle selection-->
-            <div class="btnwrap" >
-                <hr class="divider"/> 
-                <div class="btnwrapinner" v-if="getCurQuestion">
-                    <button class="fade-in"
-                        v-for="answer in getCurQuestion.answers"
-                            :index="getCurQuestion.key"
-                            :key="answer"
-                            v-html="answer"
-                            @click.prevent="handleButtonClick"
-                    ></button>
-                </div>
-                <hr class="divider"/> 
+     <!--Do noyt show the question if it is not yet loaded -->         
+    <h1  class="thequestion fade-in" v-html="loading ? 'Loading...' : getCurQuestion.question"></h1>
+     <score :numOfQuestions=getQuestionsLength :correctQuestions.sync="correctQuestions"/>
+    
+
+    <div class="btnwrap" >
+        <hr class="divider"/> 
+        <div class="btnwrapinner" v-if="getCurQuestion">
+        <button class="fade-in"
+          v-for="answer in getCurQuestion.answers"
+          :index="getCurQuestion.key"
+          :key="answer"
+          v-html="answer"
+          @click.once="handleButtonClick"
+        ></button>
+         </div>
+            <hr class="divider"/> 
+      </div>
+    
+      </div>
+
+           
+
+            <div class="endgameWrap">
+            <endgame  :totalScore="scoreCount" :qCount="questionCount" :correct="correctQuestions" :uAnswer="answers"
+                 :cAnswer="correctAnswer" :quest="thequestion"/>
             </div>
-        </div>
-        <!--When end of question have been reached then display result screen-->
-        <div class="endgameWrap">
-            <endgame  :totalScore="scoreCount" :qCount="questionCount" :correct="correctQuestions"/>
-        </div>
-    </div>
+          
+      </div>
+  
 </template>
 
 <script>
@@ -32,7 +39,6 @@ import score from './scorer';
 import endgame from './EndGame';
 
 export default {
-<<<<<<< HEAD
   name: 'game',
   data(){
     return {
@@ -47,30 +53,29 @@ export default {
       loading:true
     }
   },components:{
-=======
-    name: 'game',
-    data(){
-        return {
-            questionCount:null,
-            scoreCount:null,
-            questions:[],
-            correctQuestions:null,
-            answeredQuestions:null,
-            loading:true
-        }
-    },
-  
-    components:{
->>>>>>> 5627fa475e279aee4317520feab1bf1a128cca4e
         score,
         endgame
-    },
+  },
+   props: {
+    apidata:Promise,
+    totalScore:Number
+  },
+  created:function(){
+      this.questionCount=0;
+      this.scoreCount=0;
+      this.correctQuestions=0;
+      this.answeredQuestions=0;
+
+      this.apidata.then((result) => { 
+         this.questions=result;  
+         this.loading=false   
+      })
   
-    props: {
-        apidata:Promise,
-        totalScore:Number
-    },
-handleButtonClick: function(evt) {
+    
+  },
+  methods:{
+  
+    handleButtonClick: function(evt) {
         let index = evt.target.getAttribute("index");
         let answer =evt.target.innerHTML;
         let target=evt.target;
@@ -100,7 +105,7 @@ handleButtonClick: function(evt) {
                  this.questionCount++
              
             }.bind(this),
-            1000
+            500
           );
        
 
@@ -110,67 +115,20 @@ handleButtonClick: function(evt) {
       getCurQuestion(){
         if (this.questions !== []) {
            
-=======
-    created:function(){
-        this.questionCount=0;
-        this.scoreCount=0;
-        this.correctQuestions=0;
-        this.answeredQuestions=0;
-        this.apidata.then((result) => { 
-            this.questions=result;  
-            this.loading=false   
-        })    
-    },
-    
-    methods:{
-/*
-* Check if answer is correct and change index of current answer
-*/
-        handleButtonClick: function(evt) {
-            let index = evt.target.getAttribute("index");
-            let answer =evt.target.innerHTML;
-            let target=evt.target;
-            this.isAnswerCorrect(answer,index,target);
-        },
-/*
-* Check is answer is correct, increase score if true
-*/
-        isAnswerCorrect: function(answer,index,target){
-            if(answer==this.questions[index].correct_answer){
-                target.classList.add("answerCorrect");
-                this.correctQuestions++
-                this.scoreCount+=10
-            }else{
-                target.classList.add("answerLooser");
-            }
-            setTimeout(
-                function() {
-                    target.classList.remove("answerCorrect");
-                    target.classList.remove("answerLooser");
-                    this.questionCount++ 
-                }.bind(this),
-                1000
-            );
-        }
-    },
-    
-    computed:{
-        getCurQuestion(){
-            if (this.questions !== []) {
->>>>>>> 5627fa475e279aee4317520feab1bf1a128cca4e
                 return this.questions[this.questionCount];
             }
-            return null;
-        },
-    
-        getQuestionsLength(){
-            return this.questions.length -1
-        },
-    
-        getQcount(){
-            return this.questionCount;
-        },
-    },
+      return null;
+      },
+      getQuestionsLength(){
+          
+          return this.questions.length -1
+      },
+      getQcount(){
+          return this.questionCount;
+      },
+  
+  },
+ 
 };
 </script>
 <style>
