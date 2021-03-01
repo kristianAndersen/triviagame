@@ -11,7 +11,10 @@ import { getQandA } from './utills/fetchApi.js'
 Vue.config.productionTip = false
 Vue.use(Router)
 
-
+/*
+* Routing to components
+* Loading api call with shuffled answers into game component
+*/
 
 const router = new Router({
   routes: [
@@ -19,7 +22,9 @@ const router = new Router({
     {path: '/game',name: 'game',component: game,props:{apidata:getQandA()} },
   ]
 })
-
+/*
+* Inject router to mount instance
+*/
 new Vue({
   router,
   render: h => h(App),
