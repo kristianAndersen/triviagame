@@ -1,4 +1,5 @@
 <template>
+<!--Vue Component handling the welcome screen-->
   <div class="hello">
   
   <h1>{{msg}}</h1>
