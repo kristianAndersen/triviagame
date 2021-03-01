@@ -1,4 +1,5 @@
 <template>
+<!--Component for displaying score related to total questions-->
   <div id="scorenum" >{{"You have "+correctQuestions+" correct answers out of "+numOfQuestions}} </div>
        
     
