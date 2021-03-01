@@ -57,21 +57,22 @@ computed:{
     margin: 0 auto;
     width: 40vw;
     min-height: 12rem;
+    max-height: 40rem;
     background-color: rgb(194, 175, 66);
     border-radius: 1rem;
     padding-bottom: 2rem;
 }
 .htag{
-    padding: 2rem;
-    font-size: 200%;
+    padding: 1rem;
+    font-size: 180%;
     text-transform: uppercase;
     font-weight: bolder;
 }
 .looserimg{
-  padding: 3rem;
+  padding: 1rem;
   vertical-align: middle;
-  width: 70%;
-  height: 70%;
+  width: 50%;
+  height: 50%;
   border-radius: 50%;
 }
 .score{
