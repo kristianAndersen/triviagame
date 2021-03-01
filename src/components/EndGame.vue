@@ -15,7 +15,26 @@
     <hr class="divider"/> 
   </div>
 
-  <div v-if="correct<10">
+  <div v-if="correct<10 && correct>=5">
+    <img class="looserimg" src="closebutno.gif">
+    <h2 class="htag">SO CLOSE YET SO FARE <br>you got {{totalScore}} points</h2>
+
+        <div class="score"> You answered <br><span class="highlight">{{
+                  howGoodBad}} % correctly. That is {{correct}} out of {{qCount}} sad!
+              </span>
+       </div>
+    <hr class="divider"/> 
+    <router-link to="/">
+  <button> TRY AGAIN</button>
+    </router-link>
+    <hr class="divider"/> 
+  </div>
+
+
+
+
+
+  <div v-if="correct<5">
     <img class="looserimg" src="looser.gif">
     <h2 class="htag">WHAT A LOSER <br>you only got {{totalScore}} points</h2>
 
