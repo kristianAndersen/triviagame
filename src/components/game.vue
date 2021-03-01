@@ -14,7 +14,7 @@
           :index="getCurQuestion.key"
           :key="answer"
           v-html="answer"
-          @click.prevent="handleButtonClick"
+          @click.once="handleButtonClick"
         ></button>
          </div>
             <hr class="divider"/> 
@@ -25,7 +25,8 @@
            
 
             <div class="endgameWrap">
-            <endgame  :totalScore="scoreCount" :qCount="questionCount" :correct="correctQuestions"/>
+            <endgame  :totalScore="scoreCount" :qCount="questionCount" :correct="correctQuestions" :uAnswer="answers"
+                 :cAnswer="correctAnswer" :quest="thequestion"/>
             </div>
           
       </div>
@@ -46,6 +47,9 @@ export default {
       questions:[],
       correctQuestions:null,
       answeredQuestions:null,
+      thequestion:[],
+      correctAnswer:[],
+      answers:[],
       loading:true
     }
   },components:{
@@ -75,13 +79,16 @@ export default {
         let index = evt.target.getAttribute("index");
         let answer =evt.target.innerHTML;
         let target=evt.target;
+        this.thequestion.push(this.questions[this.questionCount].question)
         this.isAnswerCorrect(answer,index,target);
     },
     isAnswerCorrect: function(answer,index,target){
         
         if(answer==this.questions[index].correct_answer){
          target.classList.add("answerCorrect");
+               
               
+     
               this.correctQuestions++
               this.scoreCount+=10
         }else{
@@ -91,7 +98,11 @@ export default {
             function() {
                 target.classList.remove("answerCorrect");
                 target.classList.remove("answerLooser");
-              this.questionCount++
+                 
+                 this.answers.push(answer)
+                 this.correctAnswer.push(this.questions[index].correct_answer)
+
+                 this.questionCount++
              
             }.bind(this),
             1000
